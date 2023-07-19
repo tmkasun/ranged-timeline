@@ -6,14 +6,14 @@ import TimelineYear from "./TimeLineYear";
 
 type TimeLineProps = {};
 
-type StyledTimeLineProps = { years: string[] } & StyledLanes;
-const StyledTimeLine = styled.div`
+type StyledTimeLineProps = { years: number[] };
+const StyledTimeLine = styled.div<StyledTimeLineProps>`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: ${({ years }: StyledTimeLineProps) =>
+  grid-template-rows: ${({ years }) =>
     `repeat(${years.length * 12}, 1fr)`};
   gap: 0.5rem 0rem;
-  grid-template-areas: ${({ years }: StyledTimeLineProps) =>
+  grid-template-areas: ${({ years }) =>
     years.map((y) => `"t${y}"`.repeat(12)).join(" ")};
   grid-area: timeline;
 `;

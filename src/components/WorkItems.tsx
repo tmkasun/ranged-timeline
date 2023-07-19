@@ -9,14 +9,14 @@ type WorkItemsProps = {
   children: React.ReactNode;
 };
 type StyledWorkItemsProps = {
-  years: string[];
+  years: number[];
   timelineItems: TimeLineItemsType;
 };
-const StyledWorkItems = styled.div`
+const StyledWorkItems = styled.div<StyledWorkItemsProps>`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: ${({ years }: StyledWorkItemsProps) =>
+  grid-template-rows: ${({ years }) =>
     `repeat(${years.length * 12}, 1fr)`};
   gap: 0.2rem 0rem;
   grid-area: work;

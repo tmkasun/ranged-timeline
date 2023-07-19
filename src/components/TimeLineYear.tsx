@@ -25,22 +25,23 @@ const TimelineYear = (props: TimelineYearProps) => {
   const { children, name, from, to } = props;
   const { setTimeLineItems } = useTimeLineItems();
   useEffect(() => {
-    setTimeLineItems((current) => {
-      const shallowCurrentCopy = structuredClone(current);
-      for (let year = from; year < to; year++) {
-        if (shallowCurrentCopy[year]) {
-          shallowCurrentCopy[year] = [...shallowCurrentCopy[year], name];
+    if (from && to) {
+      setTimeLineItems((current) => {
+        const shallowCurrentCopy = structuredClone(current);
+        for (let year = from; year < to; year++) {
+          if (shallowCurrentCopy[year]) {
+            shallowCurrentCopy[year] = [...shallowCurrentCopy[year], name];
+          }
+          shallowCurrentCopy[year] = [name];
         }
-        shallowCurrentCopy[year] = [name];
-      }
-      return shallowCurrentCopy;
-    });
+        return shallowCurrentCopy;
+      });
+    }
   }, [name, from, to]);
   return (
     <StyledTimelineYear name={name}>
       <BorderDiv></BorderDiv>
       {children}
-      <BorderDiv></BorderDiv>
     </StyledTimelineYear>
   );
 };

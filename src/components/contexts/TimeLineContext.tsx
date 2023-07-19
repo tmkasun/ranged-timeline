@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 type ContextType = {
-  years: string[];
+  years: number[];
   from: number;
   to: number;
 };

@@ -9,14 +9,14 @@ type EducationItemsProps = {
   children: React.ReactNode;
 };
 type StyledEducationItemsProps = {
-  years: string[];
+  years: number[];
   timelineItems: TimeLineItemsType;
 };
-const StyledEducationItems = styled.div`
+const StyledEducationItems = styled.div<StyledEducationItemsProps>`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: ${({ years }: StyledEducationItemsProps) =>
+  grid-template-rows: ${({ years }) =>
     `repeat(${years.length * 12}, 1fr)`};
   gap: 0.2rem 0rem;
   grid-area: education;

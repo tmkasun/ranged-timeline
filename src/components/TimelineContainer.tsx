@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useHoveredItem } from "./contexts/HoverItem";
+import { HoveredItemType, useHoveredItem } from "./contexts/HoverItem";
 import TimeLineContextProvider from "./contexts/TimeLineContext";
 
 type TimelineContainerProps = {
@@ -18,26 +18,26 @@ export const StyledTimelineContainer = styled.div`
   grid-template-areas: "education . timeline markerItems work";
 `;
 
-const Marker = styled.div`
+const Marker = styled.div<{ hovered: HoveredItemType | null }>`
   border-top: 1px dashed gray;
   border-bottom: 1px dashed gray;
   width: 100%;
-  display: ${({ hovered }: { start: number }) => {
+  display: ${({ hovered }) => {
     return hovered?.start ? "initial" : "none";
   }};
-  grid-row-start: ${({ hovered }: { start: number }) => {
+  grid-row-start: ${({ hovered }) => {
     return hovered?.start;
   }};
-  grid-row-end: ${({ hovered }: { end: number }) => hovered?.end};
+  grid-row-end: ${({ hovered }) => hovered?.end};
   grid-column-start: 1;
   grid-column-end: 1;
 `;
 
-const StyledMarkerLineItems = styled.div`
+const StyledMarkerLineItems = styled.div<{ years: number[] }>`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: ${({ years }: any) =>
+  grid-template-rows: ${({ years }) =>
     `repeat(${years.length * 12}, 1fr)`};
   gap: 0.2rem 0rem;
   grid-area: markerItems;

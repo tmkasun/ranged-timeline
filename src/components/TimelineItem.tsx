@@ -18,7 +18,7 @@ type StyledTimelineItemProps = {
   to: Date;
   startFrom: number;
   endTo: number;
-  color: string;
+  color?: string;
 };
 
 const getGridRow = (time: Date, endTo: number, start = false) => {
@@ -29,8 +29,8 @@ const getGridRow = (time: Date, endTo: number, start = false) => {
   }
 };
 
-const StyledTimelineItem = styled.div`
-  background: ${({ name, color }: StyledTimelineItemProps) =>
+const StyledTimelineItem = styled.div<StyledTimelineItemProps>`
+  background: ${({ name, color }) =>
     color || stringToColour(name)};
   border-radius: 0.5rem;
   grid-auto-rows: 2fr;
