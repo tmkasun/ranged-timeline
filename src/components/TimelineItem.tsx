@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { stringToColour } from "../utils";
 import { useHoveredItem } from "./contexts/HoverItem";
 import { useTimeLine } from "./contexts/TimeLineContext";
+dayjs.extend(relativeTime)
 
 type TimelineItemProps = {
   name: string;
@@ -40,7 +43,7 @@ const StyledTimelineItem = styled.div<StyledTimelineItemProps>`
   align-items: center;
   grid-column-start: 1;
   grid-column-end: 2;
-  justify-content: space-between;
+  justify-content: center;
   /* grid-area: ${({ name }: StyledTimelineItemProps) => name}; */
   grid-row-start: ${({ to, endTo }: StyledTimelineItemProps) =>
     getGridRow(to, endTo, true)};
@@ -53,6 +56,9 @@ const TimelineItem = (props: TimelineItemProps) => {
   const { children, name, from, to, color } = props;
   const { from: startFrom, to: endTo } = useTimeLine();
   const { setHovered } = useHoveredItem();
+  const sDay = dayjs(from);
+  const tDay = dayjs(to);
+  const diff = sDay.to(tDay, true);
   return (
     <StyledTimelineItem
       onMouseOut={() => {
@@ -74,9 +80,12 @@ const TimelineItem = (props: TimelineItemProps) => {
       name={name}
       color={color}
     >
-      <div></div>
-      <div>{children}</div>
-      <div></div>
+      <div>
+      {children}
+      </div>
+      <div>
+      {diff}
+      </div>
     </StyledTimelineItem>
   );
 };
