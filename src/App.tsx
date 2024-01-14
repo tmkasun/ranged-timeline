@@ -6,6 +6,7 @@ import TimeLine from "./components/TimeLine";
 
 import WorkItems from "./components/WorkItems";
 import HoveredItemContextProvider from "./components/contexts/HoverItem";
+import dayjs from "dayjs";
 
 const Starting = 2000;
 const Ending = new Date().getFullYear();
@@ -35,6 +36,9 @@ export default function App() {
         </EducationItems>
         <TimeLine />
         <WorkItems>
+          <TimelineItem from={"11-29-2023"} to={dayjs().format('MM-DD-YYYY')} name="Deel-SE">
+            Deel.com SE
+          </TimelineItem>
           <TimelineItem from={"03-06-2023"} to={"06-26-2023"} name="AWS-FEE">
             AWS FEE
           </TimelineItem>
